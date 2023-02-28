@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,400;0,700;1,400&display=swap');
+/* variable declaration */
+:root {
+  --primary: #14a316;
+  --light-accent: #15bd18;
+  --dark-accent: #0f7a10;
+  --red: #ff0000;
+  --background: white;
+  --light-background: #cdcac7;
+  --font-color: black;
+  --light-font: #383838;
+}
+
+.dark-mode {
+  --primary: #0ced6a;
+  --light-accent: #68d696;
+  --dark-accent: #08a449;
+  --red: #ff0000;
+  --background: #121212;
+  --light-background: #2b2a2a;
+  --font-color: white;
+  --light-font: #aabbc3;
+}
+
+/* main element styling */
+
+body {
+  padding: 0;
+  background-color: var(--background);
+  scroll-behavior: smooth;
+  color: var(--font-color);
+  font-family: 'Ubuntu', sans-serif;
+  font-size: calc(0.75em + 1vmin);
+}
+
+a {
+  text-decoration: none;
+  color: var(--primary);
+}
+
+a:hover {
+  color: var(--dark-accent);
+}
+
+strong {
+  font-weight: bold;
+  color: var(--light-accent);
+}
+
+p, label, li, span, a {
+  font-size: 1.15em;
+}
+
+hr {
+  border: 1px solid var(--light-font);
+}
+
+button {
+  padding: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-radius: 15px;
+  background-color: transparent;
+  color: var(--font-color);
+  cursor: pointer;
+  border: 2px solid var(--primary);
+  transition: 0.2s;
+  font-size: 17px;
+}
+
+button:hover {
+  border-color: var(--dark-accent);
+}

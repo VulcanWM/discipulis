@@ -6,6 +6,10 @@ export const siteTitle = "Discipulis";
 
 export default function Layout({ pageTitle, children }) {
   const title = `${siteTitle} - ${pageTitle}`;
+  function changeMode(){
+    console.log("cool")
+    
+  }
   return (
     <div>
       <Head>
@@ -26,7 +30,18 @@ export default function Layout({ pageTitle, children }) {
         <meta property="og:type" content="Website" />
         <title>{title}</title>
       </Head>
-      <main>{children}</main>
+      <nav className={styles.mobilenav} id="navbar">
+        <a href="/" className={styles.navlink}>Home</a>
+        <a href="/all_nouns" className={styles.navlink}>Nouns</a>
+        <a href="/all_verbs" className={styles.navlink}>Verbs</a>
+        <a href="/convert_noun" className={styles.navlink}>Convert Noun</a>
+        <a href="convert_verb" className={styles.navlink}>Convert Verb</a>
+        <a href="/browse_sets" className={styles.navlink}>Browse Sets</a>
+      </nav>
+      <div className={styles.content}>
+        <button className={styles.modebutton} onClick={changeMode()}>change mode</button>
+        <main>{children}</main>
+      </div>
       <Analytics />
     </div>
   );

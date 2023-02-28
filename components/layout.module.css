@@ -1,0 +1,36 @@
+.content {
+    padding: 16px;
+    padding-bottom: 80px;
+}
+
+.mobilenav {
+  background: var(--light-background);
+  overflow: hidden;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: 1;
+}
+
+.navlink {
+  float: left;
+  display: block;
+  text-decoration: underline;
+  color: var(--light-font);
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: underline;
+  font-size: 17px;
+}
+
+.navlink:hover {
+  color: var(--font-color);
+}
+
+.modebutton {
+  margin-top: 1px;
+  margin-right: 2px;
+  position:absolute;
+  top:0;
+  right:0;
+}
