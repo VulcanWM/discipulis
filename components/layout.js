@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import styles from './layout.module.css';
+import Link from 'next/link';
 import { Analytics } from '@vercel/analytics/react';
 
 export const siteTitle = "Discipulis";
@@ -31,12 +32,12 @@ export default function Layout({ pageTitle, children }) {
         <title>{title}</title>
       </Head>
       <nav className={styles.mobilenav} id="navbar">
-        <a href="/" className={styles.navlink}>Home</a>
-        <a href="/all_nouns" className={styles.navlink}>Nouns</a>
-        <a href="/all_verbs" className={styles.navlink}>Verbs</a>
-        <a href="/convert_noun" className={styles.navlink}>Convert Noun</a>
-        <a href="convert_verb" className={styles.navlink}>Convert Verb</a>
-        <a href="/browse_sets" className={styles.navlink}>Browse Sets</a>
+        <Link href="/">Home</Link>
+        <Link href="/all_nouns">Nouns</Link>
+        <Link href="/all_verbs">Verbs</Link>
+        <Link href="/convert_noun">Convert Noun</Link>
+        <Link href="convert_verb">Convert Verb</Link>
+        <Link href="/browse_sets">Browse Sets</Link>
       </nav>
       <div className={styles.content}>
         <button className={styles.modebutton} onClick={changeMode()}>change mode</button>

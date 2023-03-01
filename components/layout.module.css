@@ -12,7 +12,7 @@
   z-index: 1;
 }
 
-.navlink {
+.mobilenav a {
   float: left;
   display: block;
   text-decoration: underline;
@@ -23,7 +23,7 @@
   font-size: 17px;
 }
 
-.navlink:hover {
+.mobilenav a:hover {
   color: var(--font-color);
 }
 
