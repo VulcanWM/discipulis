@@ -136,3 +136,27 @@ export function noun_english_to_latin(word, the_case, number){
   }
   return {latin_word: latin_word, nominative: nominative}
 }
+
+export function get_noun_table(nominative){
+  var word = null
+  const key_list = Object.keys(nouns)
+  const val_list = Object.values(nouns)
+  var latin_form = null
+  val_list.forEach(form => {
+    if (form.split(", ")[0] == nominative){
+      var position = val_list.indexOf(form)
+      word = key_list[position]
+      latin_form = form
+    }
+  });
+  if (word == null){
+    return {table: false, latin_form: false, word: false}
+  }
+  var table = {"singular": {}, "plural": {}}
+  Object.keys(table).forEach(number => {
+    cases.forEach(the_case => {
+      table[number][the_case] = noun_english_to_latin(word, the_case, number).latin_word
+    })
+  })
+  return {table: table, latin_form: latin_form, word: word}
+}

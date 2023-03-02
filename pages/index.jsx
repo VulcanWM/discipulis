@@ -1,9 +1,10 @@
 import Layout from '../components/layout'
 import {verb_english_to_latin, get_verb_table} from '../grammar/verbs'
-import {noun_english_to_latin} from '../grammar/nouns'
+import {noun_english_to_latin, get_noun_table} from '../grammar/nouns'
 
 export default function HomePage() {
   // console.log(get_verb_table("amo"))
+  // console.log(get_noun_table("rex"))
   return (
     <Layout pageTitle="Home">
       <h1>Discipulis</h1>
