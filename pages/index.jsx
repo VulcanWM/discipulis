@@ -1,8 +1,5 @@
 import Layout from '../components/layout'
-// import {nouns, verbs} from '../grammar/vocab'
-
-// console.log(nouns)
-// console.log(verbs)
+import {verb_english_to_latin} from '../grammar/verbs'
 
 export default function HomePage() {
   return (
@@ -15,6 +12,7 @@ export default function HomePage() {
       <a href="/all_verbs">All Verbs</a><br/>
       <a href="/convert_verb">Convert verb from english to latin</a><br/>
       <a href="/convert_noun">Convert noun from english to latin</a><br/>
+      <p>{verb_english_to_latin("love", "2nd", "plural", "future").latin_word}</p>
     </Layout>
   );
 }
