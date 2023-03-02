@@ -37,16 +37,16 @@ const fourth_conjugation = {
 
 export function verb_english_to_latin(word, person, number, tense){
   if (tenses.includes(tense) == false){
-    return "This is not a case", false
+    return {latin_word: "This is not a case", nominative: false}
   }
   if (numbers.includes(number) == false){
-    return "A number has to be singular or plural", false
+    return {latin_word: "A number has to be singular or plural", nominative: false}
   }
   if (Object.keys(verbs).includes(word) == false){
-    return (word + " is not in the word list"), false
+    return {latin_word: (word + " is not in the word list"), nominative: false}
   }
   if (persons.includes(person) == false){
-    return "The person has to be 1st, 2nd or 3rd", false
+    return {latin_word: "The person has to be 1st, 2nd or 3rd", nominative: false}
   }
   let latin_form = verbs[word]
   let nominative = latin_form.split(", ")[0]
