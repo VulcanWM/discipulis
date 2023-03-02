@@ -73,46 +73,78 @@ export function verb_english_to_latin(word, person, number, tense){
   if (conjugation == "2nd"){
     // 2nd conjugation
     if (perfect_stems.includes(tense) == false){
-      var latin_word = infinitive.slice(0,-3) + second_conjugation[tense][index]
+      latin_word = infinitive.slice(0,-3) + second_conjugation[tense][index]
     } else {
-      var latin_word = perfect.slice(0,-1) + second_conjugation[tense][index]
+      latin_word = perfect.slice(0,-1) + second_conjugation[tense][index]
     }
   }
   if (conjugation == "3rd"){
     // 3rd conjugation
     if (perfect_stems.includes(tense) == false){
-      var latin_word = infinitive.slice(0,-3) + third_conjugation[tense][index]
+      latin_word = infinitive.slice(0,-3) + third_conjugation[tense][index]
     } else {
-      var latin_word = perfect.slice(0,-1) + third_conjugation[tense][index]
+      latin_word = perfect.slice(0,-1) + third_conjugation[tense][index]
     }
   }
   if (conjugation == "4th"){
     // 4th conjugation
     if (perfect_stems.includes(tense)){
-      var latin_word = perfect.slice(0,-1) + third_conjugation[tense][index]
+      latin_word = perfect.slice(0,-1) + third_conjugation[tense][index]
     } else if (tense == "present"){
-      var latin_word = infinitive.slice(0,-3) + third_conjugation[tense][index]
+      latin_word = infinitive.slice(0,-3) + third_conjugation[tense][index]
     } else if (tense == "present passive"){
-      var latin_word = infinitive.slice(0,-2) + fourth_conjugation[tense][index]
+      latin_word = infinitive.slice(0,-2) + fourth_conjugation[tense][index]
     } else {
-      var latin_word = infinitive.slice(0,-2) + third_conjugation[tense][index]
+      latin_word = infinitive.slice(0,-2) + third_conjugation[tense][index]
     }
   }
   if (conjugation == "mixed"){
   // mixed conjugation
     if (perfect_stems.includes(tense)){
-      var latin_word = perfect.slice(0,-1) + third_conjugation[tense][index]
+      latin_word = perfect.slice(0,-1) + third_conjugation[tense][index]
     } else if (tense == "present"){
-      var latin_word = infinitive.slice(0,-3) + third_conjugation[tense][index]
+      latin_word = infinitive.slice(0,-3) + third_conjugation[tense][index]
     } else if (tense == "present passive"){
         if (0 < index < 5){
-          var latin_word = nominative.slice(0,-2) + third_conjugation[tense][index]
+          latin_word = nominative.slice(0,-2) + third_conjugation[tense][index]
         } else {
-          var latin_word = nominative.slice(0,-1) + third_conjugation[tense][index]
+          latin_word = nominative.slice(0,-1) + third_conjugation[tense][index]
         }
     } else {
-        var latin_word = nominative.slice(0,-1) + third_conjugation[tense][index]
+        latin_word = nominative.slice(0,-1) + third_conjugation[tense][index]
     }
   }
   return {latin_word: latin_word, nominative: nominative}
+}
+
+export function get_verb_table(first_sing){
+  var word = null
+  const key_list = Object.keys(verbs)
+  const val_list = Object.values(verbs)
+  var latin_form = null
+  val_list.forEach(form => {
+    if (form.split(", ")[0] == first_sing){
+      var position = val_list.indexOf(form)
+      word = key_list[position]
+      latin_form = form
+    }
+  });
+  if (word == null){
+    return {table: false, latin_form: false, word: false}
+  }
+  var table = {"present": {},
+           "future": {},
+           "imperfect": {},
+           "perfect": {},
+           "pluperfect": {},
+           "future perfect": {},
+           'present passive': {}}
+  Object.keys(table).forEach(tense => {
+    verb_types.forEach(type => {
+      var person = type.split(" ")[0]
+      var number = type.split(" ")[1]
+      table[tense][type] = verb_english_to_latin(word, person, number, tense).latin_word
+    })
+  })
+  return {table: table, latin_form: latin_form, word: word}
 }
