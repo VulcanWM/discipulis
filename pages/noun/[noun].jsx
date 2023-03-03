@@ -1,6 +1,7 @@
 import Layout from '../../components/layout'
 import {get_noun_table} from '../../grammar/nouns'
 import {nouns} from '../../grammar/vocab'
+import styles from '../../styles/[noun].module.css'
 
 export default function HomePage( {noun}) {
   const output = get_noun_table(noun)
@@ -13,15 +14,15 @@ export default function HomePage( {noun}) {
   return (
     <Layout pageTitle={noun}>
       <h2>{clean_word}: {output.latin_form}</h2>
-      <div class="tables">
+      <div className={styles.tables}>
         {Object.keys(table).map(number => (
-          <table id={number}>
-          <caption class="upper">{number}</caption>
+          <table id={number} className={styles.table}>
+          <caption className={styles.caption + " " + styles.upper}>{number}</caption>
             {Object.keys(table[number]).map(the_case => (
             <tr>
-              <td class="upper">{the_case}</td>
+              <td className={styles.td + " " + styles.upper}>{the_case}</td>
   {/*                 <td class="flip" id={number + ":" + the_case} data-hidden="{{table[number][case]}}">Click to reveal</td> */}
-              <td>{table[number][the_case]}</td>
+              <td className={styles.td}>{table[number][the_case]}</td>
             </tr>
             ))}
           </table>

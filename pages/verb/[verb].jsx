@@ -1,6 +1,7 @@
 import Layout from '../../components/layout'
 import {get_verb_table} from '../../grammar/verbs'
 import {verbs} from '../../grammar/vocab'
+import styles from '../../styles/[verb].module.css'
 
 export default function HomePage( {verb}) {
   const output = get_verb_table(verb)
@@ -13,15 +14,15 @@ export default function HomePage( {verb}) {
   return (
     <Layout pageTitle={verb}>
       <h2>{clean_word}: {output.latin_form}</h2>
-      <div class="tables">
+      <div className={styles.tables}>
         {Object.keys(table).map(number => (
-          <table id={number}>
-          <caption class="upper">{number}</caption>
+          <table id={number} className={styles.table}>
+          <caption className={styles.caption + " " + styles.upper}>{number}</caption>
             {Object.keys(table[number]).map(the_case => (
             <tr>
-              <td class="upper">{the_case}</td>
+              <td className={styles.td + " " + styles.upper}>{the_case}</td>
   {/*                 <td class="flip" id={number + ":" + the_case} data-hidden="{{table[number][case]}}">Click to reveal</td> */}
-              <td>{table[number][the_case]}</td>
+              <td className={styles.td}>{table[number][the_case]}</td>
             </tr>
             ))}
           </table>
