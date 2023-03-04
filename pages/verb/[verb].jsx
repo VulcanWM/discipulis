@@ -3,7 +3,7 @@ import {get_verb_table} from '../../grammar/verbs'
 import {verbs} from '../../grammar/vocab'
 import styles from '../../styles/[verb].module.css'
 
-export default function HomePage( {verb}) {
+export default function VerbPage( {verb}) {
   const output = get_verb_table(verb)
   const table = output.table
   if (output.word.includes("-")){

@@ -3,7 +3,7 @@ import {nouns} from '../grammar/vocab'
 import Link from 'next/link';
 import styles from '../styles/all_nouns.module.css';
 
-export default function HomePage() {
+export default function AllNouns() {
   return (
     <Layout pageTitle="All Nouns">
       <h1>All Latin Nouns</h1>

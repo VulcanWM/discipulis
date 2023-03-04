@@ -3,7 +3,7 @@ import {get_noun_table} from '../../grammar/nouns'
 import {nouns} from '../../grammar/vocab'
 import styles from '../../styles/[noun].module.css'
 
-export default function HomePage( {noun}) {
+export default function NounPage( {noun}) {
   const output = get_noun_table(noun)
   const table = output.table
   if (output.word.includes("-")){
