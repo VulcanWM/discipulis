@@ -56,7 +56,7 @@ export function verb_english_to_latin(word, person, number, tense){
   var index = persons.indexOf(person)
   var latin_word
   if ((number == "singular") && (person == "1st") && (tense == "present")){
-    return nominative, nominative
+    return {latin_word: nominative, nominative: nominative}
   }
   if (number == "plural"){
     index += 3

@@ -2,6 +2,7 @@ import Layout from '../../components/layout'
 import clientPromise from "../../lib/mongodb";
 import styles from '../../styles/[set].module.css';
 import Link from 'next/link'
+import {word_nominative} from '../../grammar/all'
 
 export default function SetPage( {posts}) {
   const quiz_set = posts[0]
@@ -21,7 +22,7 @@ export default function SetPage( {posts}) {
       <h3>All Vocab:</h3>
       {
         Object.keys(quiz_set['Words']).map((word, index) => (
-          <a target="_blank" href={"/english_" + quiz_set['Words'][word] + "/" + word}>
+          <a target="_blank" href={"/" + quiz_set['Words'][word] + "/" + word_nominative(quiz_set['Words'][word], word).nominative}>
             <div className={styles.word}>
               <p>{word.split("-")[0]}: {quiz_set['Words'][word]}</p>
             </div> 
