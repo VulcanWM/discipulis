@@ -31,3 +31,8 @@
     height: 250px;
   }
 }
+
+.red {
+  font-weight: bold;
+  color: var(--red);
+}

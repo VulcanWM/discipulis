@@ -1,6 +1,7 @@
 import clientPromise from "../lib/mongodb";
 import Layout from '../components/layout'
 import styles from '../styles/browse_sets.module.css';
+import Link from 'next/link';
 
 export async function getStaticProps() {
   const client = await clientPromise;
@@ -19,14 +20,14 @@ export default function BrowseSets( {posts} ) {
         {
           posts.map((set, index) => (
             <div id={index}>
-              <a href={"/set/" + set['_id']}>
+              <Link href={"/set/" + set['_id']}>
                 <div className={styles.set}>
                   <h3>{set['Name']}</h3>
                   <p>{set['Plays']} &#9654;&#65039;</p>
-                  <p><span class="red">!!!</span> {set['Priority']}</p>
+                  <p><span className={styles.red}>!!!</span> {set['Priority']}</p>
                   <br/>
                 </div>
-              </a>
+              </Link>
             </div>
           ))
         }

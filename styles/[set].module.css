@@ -1,0 +1,21 @@
+.red {
+  font-weight: bold;
+  color: var(--red);
+}
+
+.word {
+  border: 2px solid var(--light-background);
+  color: var(--light-font);
+  border-radius: 10px;
+  padding: 4px;
+  font-size: 14px;
+  margin: 4px;
+  padding-left: 12px;
+}
+
+.word:hover {
+  transition: 300ms;
+  border: 2px solid var(--dark-accent);
+  color: var(--font-color);
+  cursor: pointer;
+}
