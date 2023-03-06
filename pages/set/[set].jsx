@@ -14,7 +14,7 @@ export default function SetPage( {posts}) {
     <Layout pageTitle={quiz_set.Name}>
       <h2>{quiz_set['Name']}</h2>
       <span>{quiz_set['Plays']} &#9654;&#65039; </span>
-      <span><span className={styles.red}>!!!</span> {quiz_set['Priority']}</span>
+      <span><span className="red">!!!</span> {quiz_set['Priority']}</span>
       <p>This set contains <strong>{contains}</strong></p>
       <Link href={"/start_quiz/" + quiz_set['_id']}>
         <button>start quiz settings</button>

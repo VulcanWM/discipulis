@@ -8,7 +8,7 @@ export const siteTitle = "Discipulis";
 export default function Layout({ pageTitle, children }) {
   const title = `${siteTitle} - ${pageTitle}`;
   function changeMode(){
-    console.log("cool")
+    // console.log("cool")
     
   }
   return (

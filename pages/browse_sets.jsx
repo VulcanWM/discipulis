@@ -24,7 +24,7 @@ export default function BrowseSets( {posts} ) {
                 <div className={styles.set}>
                   <h3>{set['Name']}</h3>
                   <p>{set['Plays']} &#9654;&#65039;</p>
-                  <p><span className={styles.red}>!!!</span> {set['Priority']}</p>
+                  <p><span className="red">!!!</span> {set['Priority']}</p>
                   <br/>
                 </div>
               </Link>
