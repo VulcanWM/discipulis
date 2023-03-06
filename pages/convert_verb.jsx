@@ -1,8 +1,8 @@
 import { useForm } from "react-hook-form";
 import Layout from '../components/layout';
-import {noun_english_to_latin} from '../grammar/nouns'
+import {verb_english_to_latin} from '../grammar/verbs'
 
-export default function ConvertNoun() {
+export default function ConvertVerb() {
   var msg = null
   const {
     register,
@@ -11,37 +11,48 @@ export default function ConvertNoun() {
   } = useForm();
   const onSubmit = (data) => {
     const word = data.word
-    const the_case = data.case
+    const tense = data.tense
+    const person = data.person
     const number = data.number
-    var result = noun_english_to_latin(word, the_case, number)
+    var result = verb_english_to_latin(word, person, number, tense)
     console.log(result)
     if (result.nominative == false){
       msg = result.latin_word
       document.getElementById("msg").innerText = msg
     } else {
-      msg = result.latin_word + " is the " + number + " " + the_case + " word for " + word
+      msg = result.latin_word + " is the " + tense + " " + person + " person " + number + " word for " + word
       document.getElementById("msg").innerText = msg
     }
   };
   return (
-    <Layout pageTitle="Convert Noun">
-      <h2>Convert Noun</h2>
+    <Layout pageTitle="Convert Verb">
+      <h2>Convert Verb</h2>
       <p id="msg" className="light">{msg}</p>
       <form onSubmit={handleSubmit(onSubmit)}>
         <label htmlFor="word">English Word:</label>
         <input {...register("word", { required: true })} placeholder="english word" type="text"/><br/>
-        <label htmlFor="case">Case: </label>
+        <label htmlFor="tense">Tense: </label>
         <select
-          defaultValue="nominative" id="case"
-          name="case"
-          {...register("case", { required: true })}
+          defaultValue="present" id="tense"
+          name="tense"
+          {...register("tense", { required: true })}
         >
-          <option value="nominative">Nominative</option>
-          <option value="vocative">Vocative</option>
-          <option value="accusative">Accusative</option>
-          <option value="genitive">Genitive</option>
-          <option value="dative">Dative</option>
-          <option value="ablative">Ablative</option>
+          <option value="present">Present</option>
+          <option value="imperfect">Imperfect</option>
+          <option value="perfect">Perfect</option>
+          <option value="future">Future</option>
+          <option value="pluperfect">Pluperfect</option>
+          <option value="future perfect">Future Perfect</option>
+        </select><br/>
+        <label htmlFor="person">Person: </label>
+        <select
+          defaultValue="1st" id="person"
+          name="person"
+          {...register("person", { required: true })}
+        >
+          <option value="1st">1st</option>
+          <option value="2nd">2nd</option>
+          <option value="3rd">3rd</option>
         </select><br/>
         <label htmlFor="number">Number: </label>
         <select
