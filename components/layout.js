@@ -15,6 +15,7 @@ export default function Layout({ pageTitle, children }) {
     <div>
       <Head>
         <link rel="shortcut icon" href="/favicon.ico" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"/>
         <meta
           name="description"
           content="Discipulis"
