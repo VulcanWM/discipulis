@@ -1,0 +1,7 @@
+.day {
+  border: 2px solid var(--light-background);
+  width: 92%;
+  margin: 2%;
+  border-radius: 10px;
+  padding: 2%;
+}
