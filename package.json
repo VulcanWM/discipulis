@@ -11,13 +11,17 @@
   "dependencies": {
     "@vercel/analytics": "^0.1.10",
     "dns": "^0.1.2",
+    "gray-matter": "^4.0.3",
     "mongodb": "^5.1.0",
     "net": "^1.0.2",
     "next": "12.2.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.43.5",
-    "react-router": "^6.8.2"
+    "react-router": "^6.8.2",
+    "remark": "^14.0.2",
+    "remark-html": "^15.0.2",
+    "showdown": "^2.1.0"
   },
   "devDependencies": {
     "@types/node": "18.0.1",
