@@ -12,7 +12,7 @@ export default function NounPage( {noun}) {
     var clean_word = output.word
   }
   return (
-    <Layout pageTitle={noun}>
+    <Layout pageTitle={noun} wordtype="noun">
       <h2>{clean_word}: {output.latin_form}</h2>
       <div className={styles.tables}>
         {Object.keys(table).map(number => (

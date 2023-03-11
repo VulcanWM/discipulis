@@ -11,7 +11,7 @@ export default function SetPage( {posts}) {
   contains = contains.map(i => i + "s");
   contains = contains.join(' and ')
   return (
-    <Layout pageTitle={quiz_set.Name}>
+    <Layout pageTitle={quiz_set.Name} wordtype="set">
       <h2>{quiz_set['Name']}</h2>
       <span>{quiz_set['Plays']} &#9654;&#65039; </span>
       <span><span className="red">!!!</span> {quiz_set['Priority']}</span>

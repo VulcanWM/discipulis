@@ -12,7 +12,7 @@ export default function VerbPage( {verb}) {
     var clean_word = output.word
   }
   return (
-    <Layout pageTitle={verb}>
+    <Layout pageTitle={verb} wordtype="verb">
       <h2>{clean_word}: {output.latin_form}</h2>
       <div className={styles.tables}>
         {Object.keys(table).map(number => (
