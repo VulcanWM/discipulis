@@ -23,3 +23,8 @@
 .upper {
   text-transform: uppercase;
 }
+
+.tablevalue {
+  color: var(--light-accent);
+  border-color: var(--font-color)
+}

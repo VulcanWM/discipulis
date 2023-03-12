@@ -11,6 +11,16 @@ export default function VerbPage( {verb}) {
   } else {
     var clean_word = output.word
   }
+  const onClick = (e) => {
+    const hidden = e.currentTarget.getAttribute("data-hidden")
+    if (e.currentTarget.innerText == "Click to reveal"){
+      e.currentTarget.innerText = hidden
+      e.currentTarget.classList.add(styles.tablevalue)
+    } else {
+      e.currentTarget.innerText = "Click to reveal"
+      e.currentTarget.classList.remove(styles.tablevalue)
+    }
+  }
   return (
     <Layout pageTitle={verb} wordtype="verb">
       <h2>{clean_word}: {output.latin_form}</h2>
@@ -22,7 +32,7 @@ export default function VerbPage( {verb}) {
             <tr>
               <td className={styles.td + " " + styles.upper}>{the_case}</td>
   {/*                 <td class="flip" id={number + ":" + the_case} data-hidden="{{table[number][case]}}">Click to reveal</td> */}
-              <td className={styles.td}>{table[number][the_case]}</td>
+              <td onClick={onClick} data-hidden={table[number][the_case]} className={styles.td}>{table[number][the_case]}</td>
             </tr>
             ))}
           </table>
