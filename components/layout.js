@@ -2,6 +2,7 @@ import Head from 'next/head';
 import styles from './layout.module.css';
 import Link from 'next/link';
 import { Analytics } from '@vercel/analytics/react';
+import { useTheme } from 'next-themes';
 
 const metadata = {
   "Home": {Description: "Discipulis is a website for students who are studying Latin and want to find fun resources to help them learn",
@@ -24,10 +25,8 @@ const siteTitle = "Discipulis";
 
 export default function Layout({ pageTitle, wordtype, children }) {
   const title = `${siteTitle} - ${pageTitle}`;
-  function changeMode(){
-    // console.log("cool")
-    
-  }
+  const { theme, setTheme } = useTheme()
+
   var description;
   var keywords;
   if (Object.keys(metadata).includes(pageTitle)){
@@ -74,7 +73,7 @@ export default function Layout({ pageTitle, wordtype, children }) {
         <Link href="/browse_sets">Browse Sets</Link>
       </nav>
       <div className={styles.content}>
-        <button className={styles.modebutton} onClick={changeMode()}>change mode</button>
+        <button className={styles.modebutton} onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}>change mode</button>
         <main>{children}</main>
       </div>
       <Analytics />

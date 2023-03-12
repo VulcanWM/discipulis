@@ -11,7 +11,7 @@
   --light-font: #383838;
 }
 
-.dark-mode {
+[data-theme='dark'] {
   --primary: #0ced6a;
   --light-accent: #68d696;
   --dark-accent: #08a449;
