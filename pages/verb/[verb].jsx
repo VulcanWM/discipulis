@@ -32,7 +32,7 @@ export default function VerbPage( {verb}) {
             <tr>
               <td className={styles.td + " " + styles.upper}>{the_case}</td>
   {/*                 <td class="flip" id={number + ":" + the_case} data-hidden="{{table[number][case]}}">Click to reveal</td> */}
-              <td onClick={onClick} data-hidden={table[number][the_case]} className={styles.td}>{table[number][the_case]}</td>
+              <td onClick={onClick} data-hidden={table[number][the_case]} className={styles.td + " " + styles.tablevalue}>{table[number][the_case]}</td>
             </tr>
             ))}
           </table>
