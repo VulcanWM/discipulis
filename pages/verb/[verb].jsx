@@ -21,9 +21,33 @@ export default function VerbPage( {verb}) {
       e.currentTarget.classList.remove(styles.tablevalue)
     }
   }
+  function hide_all_cells(){
+    var elements = document.querySelectorAll("td");
+    for (var i = 0, len = elements.length; i < len; i++) {
+      var element = elements[i]
+      if (element.innerText != element.innerText.toUpperCase()) {
+        element.innerText = "Click to reveal"
+        element.classList.remove(styles.tablevalue)
+      }
+    }
+  }
+  function show_all_cells(){
+    var elements = document.querySelectorAll("td");
+    for (var i = 0, len = elements.length; i < len; i++) {
+      var element = elements[i]
+      if (element.innerText != element.innerText.toUpperCase()) {
+        var hidden = element.getAttribute("data-hidden")
+        element.innerText = hidden
+        element.classList.add(styles.tablevalue)
+      }
+    }
+  }
   return (
     <Layout pageTitle={verb} wordtype="verb">
       <h2>{clean_word}: {output.latin_form}</h2>
+      <p>Click the cells to show/hide the latin words</p>
+      <button onClick={hide_all_cells}>Hide all cells</button>
+      <button onClick={show_all_cells}>Show all cells</button>
       <div className={styles.tables}>
         {Object.keys(table).map(number => (
           <table id={number} className={styles.table}>
