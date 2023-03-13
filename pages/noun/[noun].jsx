@@ -11,18 +11,33 @@ export default function NounPage( {noun}) {
   } else {
     var clean_word = output.word
   }
-  
+  var test_mode_on = false;
   const onClick = (e) => {
-    const hidden = e.currentTarget.getAttribute("data-hidden")
-    if (e.currentTarget.innerText == "Click to reveal"){
-      e.currentTarget.innerText = hidden
-      e.currentTarget.classList.add(styles.tablevalue)
-    } else {
-      e.currentTarget.innerText = "Click to reveal"
-      e.currentTarget.classList.remove(styles.tablevalue)
+    if (test_mode_on == false){
+      const hidden = e.currentTarget.getAttribute("data-hidden")
+      if (e.currentTarget.innerText == "Click to reveal"){
+        e.currentTarget.innerText = hidden
+        e.currentTarget.classList.add(styles.tablevalue)
+      } else {
+        e.currentTarget.innerText = "Click to reveal"
+        e.currentTarget.classList.remove(styles.tablevalue)
+      }
     }
   }
+
+  const onClickTest = (e) => {
+    const answer = e.currentTarget.parentElement.getAttribute("data-hidden")
+    const guess = e.currentTarget.parentElement.getElementsByTagName('input')[0].value
+    if (answer.toUpperCase() == guess.toUpperCase()){
+      e.currentTarget.parentElement.classList.add(styles.tablevalue)
+    } else {
+      e.currentTarget.parentElement.classList.add(styles.tablevalue, styles.wronganswer)
+    }
+    e.currentTarget.parentElement.innerText = answer;
+  }
+
   function hide_all_cells(){
+    test_mode_on = false;
     var elements = document.querySelectorAll("td");
     for (var i = 0, len = elements.length; i < len; i++) {
       var element = elements[i]
@@ -33,6 +48,7 @@ export default function NounPage( {noun}) {
     }
   }
   function show_all_cells(){
+    test_mode_on = false;
     var elements = document.querySelectorAll("td");
     for (var i = 0, len = elements.length; i < len; i++) {
       var element = elements[i]
@@ -43,12 +59,30 @@ export default function NounPage( {noun}) {
       }
     }
   }
+  function test_mode_on_func(){
+    test_mode_on = true;
+    var elements = document.querySelectorAll("td");
+    for (var i = 0, len = elements.length; i < len; i++) {
+      var element = elements[i]
+      if (element.innerText != element.innerText.toUpperCase()) {
+        element.classList.remove(styles.tablevalue)
+        element.innerText = ""
+        const input = document.createElement("input");
+        element.append(input);
+        const button = document.createElement("button");
+        button.textContent = "enter";
+        button.onclick = onClickTest;
+        element.append(button);
+      }
+    }
+  }
   return (
     <Layout pageTitle={noun} wordtype="noun">
       <h2>{clean_word}: {output.latin_form}</h2>
       <p>Click the cells to show/hide the latin words</p>
       <button onClick={hide_all_cells}>Hide all cells</button>
       <button onClick={show_all_cells}>Show all cells</button>
+      <button onClick={test_mode_on_func}>Test Mode On</button>
       <div className={styles.tables}>
         {Object.keys(table).map(number => (
           <table id={number} className={styles.table}>
