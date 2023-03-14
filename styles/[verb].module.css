@@ -28,3 +28,9 @@
   color: var(--light-accent);
   border-color: var(--font-color)
 }
+
+.wronganswer {
+  font-weight: bold;
+  color: var(--red);
+  border-color: var(--font-color);
+}
