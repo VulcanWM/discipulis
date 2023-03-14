@@ -29,12 +29,14 @@ export default function Layout({ pageTitle, wordtype, children }) {
 
   var description;
   var keywords;
-  if (Object.keys(metadata).includes(pageTitle)){
+  if (wordtype == null){
     description = metadata[pageTitle]['Description']
     keywords = metadata[pageTitle]['Tags']
   } else {
     if (wordtype == "set"){
       description = "Check out all the vocab in the set " + pageTitle + " and then start testing yourself on them"
+    } else if (wordtype == "start_quiz"){
+      description = "Start the quiz for set: " + pageTitle + " by filling in the quiz settings"
     } else {
       description = "See the tables for the latin " + wordtype + " " + pageTitle
     }

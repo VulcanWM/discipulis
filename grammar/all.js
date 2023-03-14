@@ -11,3 +11,6 @@ export function word_nominative(word_type, word){
   }
   return {nominative: nominative}
 }
+
+export const noun_questions = {"c": "Cases"}
+export const verb_questions = {"d": "Tenses"}
