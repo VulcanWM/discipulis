@@ -29,6 +29,7 @@ export default function NounPage( {noun}) {
     const answer = e.currentTarget.parentElement.getAttribute("data-hidden")
     const guess = e.currentTarget.parentElement.getElementsByTagName('input')[0].value
     if (answer.toUpperCase() == guess.toUpperCase()){
+      e.currentTarget.parentElement.classList.remove(styles.wronganswer)
       e.currentTarget.parentElement.classList.add(styles.tablevalue)
     } else {
       e.currentTarget.parentElement.classList.add(styles.tablevalue, styles.wronganswer)
