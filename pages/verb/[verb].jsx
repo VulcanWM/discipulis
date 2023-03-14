@@ -77,6 +77,16 @@ export default function VerbPage( {verb}) {
       }
     }
   }
+  function clear_highlight(){
+    test_mode_on = false;
+    var elements = document.querySelectorAll("td");
+    for (var i = 0, len = elements.length; i < len; i++) {
+      var element = elements[i]
+      if (element.innerText != element.innerText.toUpperCase()) {
+        element.classList.remove(styles.wronganswer)
+      }
+    }
+  }
   return (
     <Layout pageTitle={verb} wordtype="verb">
       <h2>{clean_word}: {output.latin_form}</h2>
@@ -84,6 +94,7 @@ export default function VerbPage( {verb}) {
       <button onClick={hide_all_cells}>Hide all cells</button>
       <button onClick={show_all_cells}>Show all cells</button>
       <button onClick={test_mode_on_func}>Test Mode On</button>
+      <button onClick={clear_highlight}>Clear Highlight</button>
       <div className={styles.tables}>
         {Object.keys(table).map(number => (
           <table id={number} className={styles.table}>
