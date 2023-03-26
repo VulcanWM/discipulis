@@ -9,6 +9,15 @@
   perspective: 600px;
   transition: 0.5s;
   cursor: pointer;
+  user-select: none;
+}
+
+.passed div {
+  background: #0ced6a;
+}
+
+.failed div {
+  background: #ff0000;
 }
 
 .shown .cardFront {
@@ -25,7 +34,6 @@
   justify-content: center;
   height: 100%;
   width: 100%;
-  background: #ffffff;
   position: absolute;
   top: 0;
   left: 0;
@@ -47,7 +55,6 @@
   position: absolute;
   top: 0;
   left: 0;
-  background-color: #fff;
   backface-visibility: hidden;
   transform: rotateX(180deg);
   transition: 0.5s;

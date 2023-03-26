@@ -1,8 +1,7 @@
 import React from "react";
 
-export default function Test({ answer }) {
+export default function Test({ submitTest, sector, index }) {
   const [entry, setEntry] = React.useState("");
-  const [submitted, setSubmitted] = React.useState(false);
 
   const handleChange = (e) => {
     setEntry(e.target.value);
@@ -10,27 +9,15 @@ export default function Test({ answer }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setSubmitted(true);
+    submitTest(sector, index, entry);
   };
 
   return (
     <>
-      {submitted ? (
-        <div>
-          <span
-            style={{
-              color: entry === answer ? "#0ced6a" : "#ff0000",
-            }}
-          >
-            {answer}
-          </span>
-        </div>
-      ) : (
-        <form onSubmit={handleSubmit}>
-          <input onChange={handleChange} />
-          <button type="submit">enter</button>
-        </form>
-      )}
+      <form onSubmit={handleSubmit}>
+        <input onChange={handleChange} />
+        <button type="submit">enter</button>
+      </form>
     </>
   );
 }

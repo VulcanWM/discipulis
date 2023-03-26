@@ -8,6 +8,7 @@ import Hide from "../../components/hide";
 
 export default function VerbPage({ verb }) {
   const [visibleTableEntries, setVisibleTableEntries] = useState({});
+  const [testResultEntries, setTestResultEntries] = useState({});
   const [isTestMode, setIsTestMode] = useState(false);
   const output = get_verb_table(verb);
   const table = output.table;
@@ -21,11 +22,20 @@ export default function VerbPage({ verb }) {
   useEffect(() => {
     let tableKeys = Object.keys(table);
     let visibleTableEntriesSetter = {};
+    let testResultEntriesSetter = {};
     tableKeys.forEach((key) => {
       visibleTableEntriesSetter[key] = Array(
         Object.keys(table[key]).length
       ).fill(false);
+      testResultEntriesSetter[key] = Array(Object.keys(table[key]).length).fill(
+        {
+          completed: false,
+          correct: true,
+          userAnswer: "",
+        }
+      );
     });
+    setTestResultEntries(testResultEntriesSetter);
     setVisibleTableEntries(visibleTableEntriesSetter);
   }, []);
 
@@ -37,6 +47,7 @@ export default function VerbPage({ verb }) {
   };
 
   function hide_all_cells() {
+    setIsTestMode(false);
     let tableKeys = Object.keys(table);
     let visibleTableEntriesSetter = {};
     tableKeys.forEach((key) => {
@@ -48,6 +59,7 @@ export default function VerbPage({ verb }) {
   }
 
   function show_all_cells() {
+    setIsTestMode(false);
     let tableKeys = Object.keys(table);
     let visibleTableEntriesSetter = {};
     tableKeys.forEach((key) => {
@@ -60,11 +72,47 @@ export default function VerbPage({ verb }) {
 
   function test_mode_on_func() {
     setIsTestMode(true);
+    const newTestResultEntries = { ...testResultEntries };
+    Object.keys(newTestResultEntries).forEach((sector) => {
+      Object.keys(newTestResultEntries[sector]).forEach((index) => {
+        newTestResultEntries[sector][index] = {
+          completed: false,
+          correct: testResultEntries[sector][index]["correct"],
+          userAnswer: testResultEntries[sector][index]["userAnswer"],
+        };
+      });
+    });
+    setTestResultEntries(newTestResultEntries);
   }
 
   function clear_highlight() {
-    setIsTestMode(false);
+    const newTestResultEntries = { ...testResultEntries };
+    Object.keys(newTestResultEntries).forEach((sector) => {
+      Object.keys(newTestResultEntries[sector]).forEach((index) => {
+        newTestResultEntries[sector][index] = {
+          completed: testResultEntries[sector][index]["completed"],
+          correct: true,
+          userAnswer: "",
+        };
+      });
+    });
+    setTestResultEntries(newTestResultEntries);
   }
+
+  const submitTest = (sector, index, userAnswer) => {
+    const newTestResultEntries = { ...testResultEntries };
+    newTestResultEntries[sector][index] = {
+      completed: true,
+      correct: userAnswer === table[sector][Object.keys(table[sector])[index]],
+      userAnswer: userAnswer,
+    };
+    setTestResultEntries(newTestResultEntries);
+
+    // Update visible table entries to make the submitted answer visible
+    const newVisibleTableEntries = { ...visibleTableEntries };
+    newVisibleTableEntries[sector][index] = true;
+    setVisibleTableEntries(newVisibleTableEntries);
+  };
 
   return (
     <Layout pageTitle={verb} wordtype="verb">
@@ -91,8 +139,14 @@ export default function VerbPage({ verb }) {
                     onClick={() => onClick(number, i)}
                     className={styles.td + " " + styles.tablevalue}
                   >
-                    {isTestMode ? (
-                      <Test answer={table[number][the_case]} />
+                    {isTestMode &&
+                    !testResultEntries[number][i]["completed"] ? (
+                      <Test
+                        answer={table[number][the_case]}
+                        submitTest={submitTest}
+                        sector={number}
+                        index={i}
+                      />
                     ) : (
                       <Hide
                         isVisible={
@@ -101,6 +155,10 @@ export default function VerbPage({ verb }) {
                             : false
                         }
                         content={table[number][the_case]}
+                        failed={
+                          testResultEntries[number] &&
+                          !testResultEntries[number][i].correct
+                        }
                       />
                     )}
                   </td>
