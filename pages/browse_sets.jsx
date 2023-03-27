@@ -1,12 +1,10 @@
-import clientPromise from "../lib/mongodb";
+import { all_sets } from "../lib/database"
 import Layout from '../components/layout'
 import styles from '../styles/browse_sets.module.css';
 import Link from 'next/link';
 
 export async function getStaticProps() {
-  const client = await clientPromise;
-  const db = client.db("Quiz");
-  const posts = await db.collection("Sets").find({}).sort("Priority", 1).toArray();
+  const posts = await all_sets()
   return {
     props: {posts},
   }
@@ -19,7 +17,8 @@ export default function BrowseSets( {posts} ) {
       <div className={styles.sets}>
         {
           posts.map((set, index) => (
-            <div id={index}>
+            <div key={index} id={index}>
+              
               <Link href={"/set/" + set['_id']}>
                 <div className={styles.set}>
                   <h3>{set['Name']}</h3>

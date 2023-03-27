@@ -1,12 +1,10 @@
 import Layout from '../../components/layout'
-import clientPromise from "../../lib/mongodb";
+import { distinct_set_ids, get_set } from "../../lib/database"
 import styles from '../../styles/[set].module.css';
 import Link from 'next/link'
 import {word_nominative} from '../../grammar/all'
 
-export default function SetPage( {posts}) {
-  const quiz_set = posts[0]
-  console.log(quiz_set)
+export default function SetPage( {quiz_set}) {
   var contains = quiz_set['Type'].split("-")
   contains = contains.map(i => i + "s");
   contains = contains.join(' and ')
@@ -34,9 +32,7 @@ export default function SetPage( {posts}) {
 }
 
 export async function getStaticPaths() {
-  const client = await clientPromise;
-  const db = client.db("Quiz");
-  const path_ids = await db.collection("Sets").distinct('_id', {}, {});
+  const path_ids = await distinct_set_ids()
   var paths = []
   for await (const post of path_ids) {
     await paths.push("/set/" + post)
@@ -48,10 +44,8 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const client = await clientPromise;
-  const db = client.db("Quiz");
-  const posts = await db.collection("Sets").find({"_id": params.set}).toArray()
+  const quiz_set = await get_set(params.set)
   return {
-    props: {posts},
+    props: {quiz_set},
   }
 }

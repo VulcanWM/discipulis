@@ -13,11 +13,11 @@
 }
 
 .passed div {
-  background: #0ced6a;
+  background: var(--primary);
 }
 
 .failed div {
-  background: #ff0000;
+  background: var(--red);
 }
 
 .shown .cardFront {
