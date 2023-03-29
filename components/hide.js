@@ -1,4 +1,3 @@
-import { useState } from "react";
 import styles from "./hide.module.css";
 
 function Hide({ content, isVisible, failed }) {

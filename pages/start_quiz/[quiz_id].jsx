@@ -37,7 +37,7 @@ export default function StartQuizPage( {posts}) {
     <Layout pageTitle={quiz_set.Name} wordtype="start_quiz">
       <h2><Link href={"/set/" + quiz_set._id}>{quiz_set['Name']}</Link></h2>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <label for="answer_type">Answer Type:</label>
+        <label htmlFor="answer_type">Answer Type:</label>
         <select defaultValue="both" {...register("answer_type", { required: true })} name="answer_type" id="answer_type">
             <option value="multiple">Multiple Choice Only</option>
             <option value="written">Written Only</option>
@@ -53,23 +53,7 @@ export default function StartQuizPage( {posts}) {
           ))
         }
         <br/><button>start quiz</button>
-    </form>
-      {/* <span>{quiz_set['Plays']} &#9654;&#65039; </span>
-      <span><span className="red">!!!</span> {quiz_set['Priority']}</span>
-      <p>This set contains <strong>{contains}</strong></p>
-      <Link href={"/start_quiz/" + quiz_set['_id']}>
-        <button>start quiz settings</button>
-      </Link>
-      <h3>All Vocab:</h3>
-      {
-        Object.keys(quiz_set['Words']).map((word, index) => (
-          <a target="_blank" href={"/" + quiz_set['Words'][word] + "/" + word_nominative(quiz_set['Words'][word], word).nominative}>
-            <div className={styles.word}>
-              <p>{word.split("-")[0]}: {quiz_set['Words'][word]}</p>
-            </div> 
-          </a>
-        ))
-      } */}
+      </form>
     </Layout>
   );
 }
