@@ -1,11 +1,12 @@
 import Layout from '../../components/layout'
-import clientPromise from "../../lib/mongodb";
+import { distinct_set_ids, get_set } from "../../lib/database"
 import styles from '../../styles/[quiz_id].module.css';
 import Link from 'next/link'
 import {noun_questions, verb_questions} from '../../grammar/all'
 import { useForm } from "react-hook-form";
+import Router from 'next/router'
 
-export default function StartQuizPage( {posts}) {
+export default function StartQuizPage( {quiz_set}) {
   const {
     register,
     handleSubmit,
@@ -23,9 +24,13 @@ export default function StartQuizPage( {posts}) {
       }
     }
     console.log(question_types)
-    alert("The start quiz function hasn't been fully implemented yet")
+    const question_types_str = question_types.join("")
+    if (question_types_str == ""){
+      document.getElementById("error_msg").innerHTML = "You have to check at least one question type"
+    } else {
+      Router.push(`/quiz/${quiz_set['_id']}?answer_type=${answer_type}&question_type=${question_types_str}`)
+    }
   }
-  const quiz_set = posts[0]
   var questions = {}
   if (quiz_set['Type'].includes("noun")){
     Object.assign(questions, noun_questions);
@@ -37,6 +42,7 @@ export default function StartQuizPage( {posts}) {
     <Layout pageTitle={quiz_set.Name} wordtype="start_quiz">
       <h2><Link href={"/set/" + quiz_set._id}>{quiz_set['Name']}</Link></h2>
       <form onSubmit={handleSubmit(onSubmit)}>
+        <p id="error_msg" className="red"></p>
         <label htmlFor="answer_type">Answer Type:</label>
         <select defaultValue="both" {...register("answer_type", { required: true })} name="answer_type" id="answer_type">
             <option value="multiple">Multiple Choice Only</option>
@@ -59,9 +65,10 @@ export default function StartQuizPage( {posts}) {
 }
 
 export async function getStaticPaths() {
-  const client = await clientPromise;
-  const db = client.db("Quiz");
-  const path_ids = await db.collection("Sets").distinct('_id', {}, {});
+  // const client = await clientPromise;
+  // const db = client.db("Quiz");
+  // const path_ids = await db.collection("Sets").distinct('_id', {}, {});
+  const path_ids = await distinct_set_ids()
   var paths = []
   for await (const post of path_ids) {
     await paths.push("/start_quiz/" + post)
@@ -73,10 +80,8 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const client = await clientPromise;
-  const db = client.db("Quiz");
-  const posts = await db.collection("Sets").find({"_id": params.quiz_id}).toArray()
+  const quiz_set = await get_set(params.quiz_id)
   return {
-    props: {posts},
+    props: {quiz_set},
   }
 }
