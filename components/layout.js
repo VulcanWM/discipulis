@@ -59,7 +59,7 @@ export default function Layout({ pageTitle, wordtype, children }) {
         "Check out all the vocab in the set " +
         pageTitle +
         " and then start testing yourself on them";
-    } else if (wordtype == "start_quiz") {
+    } else if (wordtype == "quiz") {
       description =
         "Start the quiz for set: " +
         pageTitle +

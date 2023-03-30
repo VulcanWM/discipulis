@@ -39,7 +39,7 @@ export default function StartQuizPage( {quiz_set}) {
     Object.assign(questions, verb_questions);
   }
   return (
-    <Layout pageTitle={quiz_set.Name} wordtype="start_quiz">
+    <Layout pageTitle={quiz_set._id} wordtype="quiz">
       <h2><Link href={"/set/" + quiz_set._id}>{quiz_set['Name']}</Link></h2>
       <form onSubmit={handleSubmit(onSubmit)}>
         <p id="error_msg" className="red"></p>
@@ -65,9 +65,6 @@ export default function StartQuizPage( {quiz_set}) {
 }
 
 export async function getStaticPaths() {
-  // const client = await clientPromise;
-  // const db = client.db("Quiz");
-  // const path_ids = await db.collection("Sets").distinct('_id', {}, {});
   const path_ids = await distinct_set_ids()
   var paths = []
   for await (const post of path_ids) {
