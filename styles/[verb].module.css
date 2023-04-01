@@ -20,6 +20,10 @@
   margin: 4px;
 }
 
+/* .caption:hover {
+  text-decoration: line-through;
+} */
+
 .upper {
   text-transform: uppercase;
 }

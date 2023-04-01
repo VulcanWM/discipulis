@@ -117,7 +117,7 @@ export default function VerbPage({ verb }) {
   return (
     <Layout pageTitle={verb} wordtype="verb">
       <h2>
-        {clean_word}: {output.latin_form}
+        I {clean_word}: {output.latin_form}
       </h2>
       <p>Click the cells to show/hide the latin words</p>
       <button onClick={hide_all_cells}>Hide all cells</button>
@@ -134,7 +134,6 @@ export default function VerbPage({ verb }) {
               {Object.keys(table[number]).map((the_case, i) => (
                 <tr key={i}>
                   <td className={styles.td + " " + styles.upper}>{the_case}</td>
-                  {/*                 <td class="flip" id={number + ":" + the_case} data-hidden="{{table[number][case]}}">Click to reveal</td> */}
                   <td
                     onClick={() => onClick(number, i)}
                     className={styles.td + " " + styles.tablevalue}

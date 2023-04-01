@@ -7,7 +7,8 @@ const first_conjugation = {
     'future': ['abo', 'abis', 'abit', 'abimus', 'abitis', 'abunt'],
     'future perfect': ['ero', 'eris', 'erit', 'erimus', 'eritis', 'erint'],
     'pluperfect': ['eram', 'eras', 'erat', 'eramus', 'eratis', 'erant'],
-    'present passive': ['or', 'aris', 'atur', 'amur', 'amini', 'antur']
+    'present passive': ['or', 'aris', 'atur', 'amur', 'amini', 'antur'],
+    'future passive': ['abor', 'aberis', 'abitur', 'abimur', 'abimini', 'abuntur']
 }
 
 const second_conjugation = {
@@ -17,7 +18,8 @@ const second_conjugation = {
     'future': ['ebo', 'ebis', 'ebit', 'ebimus', 'ebitis', 'ebunt'],
     'future perfect': ['ero', 'eris', 'erit', 'erimus', 'eritis', 'erint'],
     'pluperfect': ['eram', 'eras', 'erat', 'eramus', 'eratis', 'erant'],
-    'present passive': ['eor', 'eris', 'etur', 'emur', 'emini', 'entur']
+    'present passive': ['eor', 'eris', 'etur', 'emur', 'emini', 'entur'],
+    'future passive': ['ebor', 'eberis', 'ebitur', 'ebimur', 'ebimini', 'ebuntur']
 }
 
 const third_conjugation = {
@@ -27,7 +29,8 @@ const third_conjugation = {
     'future': ['am', 'es', 'et', 'emus', 'etis', 'ent'],
     'future perfect': ['ero', 'eris', 'erit', 'erimus', 'eritis', 'erint'],
     'pluperfect': ['eram', 'eras', 'erat', 'eramus', 'eratis', 'erant'],
-    'present passive': ['or', 'eris', 'itur', 'imur', 'imini', 'untur']
+    'present passive': ['or', 'eris', 'itur', 'imur', 'imini', 'untur'],
+    'future passive': ['ar', 'eris', 'etur', 'emur', 'emini', 'entur']
 }
 
 const fourth_conjugation = {
@@ -67,7 +70,7 @@ export function verb_english_to_latin(word, person, number, tense){
       latin_word = infinitive.slice(0,-3) + first_conjugation[tense][index]
     } else {
       latin_word = perfect.slice(0,-1) + first_conjugation[tense][index]
-      
+    
     }
   }
   if (conjugation == "2nd"){
@@ -111,7 +114,7 @@ export function verb_english_to_latin(word, person, number, tense){
           latin_word = nominative.slice(0,-1) + third_conjugation[tense][index]
         }
     } else {
-        latin_word = nominative.slice(0,-1) + third_conjugation[tense][index]
+      latin_word = nominative.slice(0,-1) + third_conjugation[tense][index]
     }
   }
   return {latin_word: latin_word, nominative: nominative}
@@ -138,7 +141,8 @@ export function get_verb_table(first_sing){
            "perfect": {},
            "pluperfect": {},
            "future perfect": {},
-           'present passive': {}}
+           'present passive': {},
+           'future passive': {}}
   Object.keys(table).forEach(tense => {
     verb_types.forEach(type => {
       var person = type.split(" ")[0]
