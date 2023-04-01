@@ -1,7 +1,7 @@
 export const numbers = ['singular', 'plural']
 export const cases = ['nominative', 'vocative', 'accusative', 'genitive', 'dative', 'ablative']
 export const persons = ['1st', '2nd', '3rd']
-export const tenses = ['present', 'future', 'imperfect', 'perfect', 'pluperfect', 'future perfect', 'present passive', 'future passive']
+export const tenses = ['present', 'future', 'imperfect', 'perfect', 'pluperfect', 'future perfect', 'present passive', 'future passive', 'imperfect passive']
 export const perfect_stems = ['perfect', 'pluperfect', 'future perfect']
 export const verb_types = ['1st singular', '2nd singular', '3rd singular', '1st plural', '2nd plural', '3rd plural']
 export const noun_questions = {"c": "Cases"}

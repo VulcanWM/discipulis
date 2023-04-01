@@ -8,7 +8,8 @@ const first_conjugation = {
     'future perfect': ['ero', 'eris', 'erit', 'erimus', 'eritis', 'erint'],
     'pluperfect': ['eram', 'eras', 'erat', 'eramus', 'eratis', 'erant'],
     'present passive': ['or', 'aris', 'atur', 'amur', 'amini', 'antur'],
-    'future passive': ['abor', 'aberis', 'abitur', 'abimur', 'abimini', 'abuntur']
+    'future passive': ['abor', 'aberis', 'abitur', 'abimur', 'abimini', 'abuntur'],
+    'imperfect passive': ['abar', 'abaris', 'abatur', 'abamur', 'abamini', 'abantur']
 }
 
 const second_conjugation = {
@@ -19,7 +20,8 @@ const second_conjugation = {
     'future perfect': ['ero', 'eris', 'erit', 'erimus', 'eritis', 'erint'],
     'pluperfect': ['eram', 'eras', 'erat', 'eramus', 'eratis', 'erant'],
     'present passive': ['eor', 'eris', 'etur', 'emur', 'emini', 'entur'],
-    'future passive': ['ebor', 'eberis', 'ebitur', 'ebimur', 'ebimini', 'ebuntur']
+    'future passive': ['ebor', 'eberis', 'ebitur', 'ebimur', 'ebimini', 'ebuntur'],
+    'imperfect passive': ['ebar', 'ebaris', 'ebatur', 'ebamur', 'ebamini', 'ebantur']
 }
 
 const third_conjugation = {
@@ -30,7 +32,8 @@ const third_conjugation = {
     'future perfect': ['ero', 'eris', 'erit', 'erimus', 'eritis', 'erint'],
     'pluperfect': ['eram', 'eras', 'erat', 'eramus', 'eratis', 'erant'],
     'present passive': ['or', 'eris', 'itur', 'imur', 'imini', 'untur'],
-    'future passive': ['ar', 'eris', 'etur', 'emur', 'emini', 'entur']
+    'future passive': ['ar', 'eris', 'etur', 'emur', 'emini', 'entur'],
+    'imperfect passive': ['ebar', 'ebaris', 'ebatur', 'ebamur', 'ebamini', 'ebantur']
 }
 
 const fourth_conjugation = {
@@ -142,7 +145,8 @@ export function get_verb_table(first_sing){
            "pluperfect": {},
            "future perfect": {},
            'present passive': {},
-           'future passive': {}}
+           'future passive': {},
+           'imperfect passive': {}}
   Object.keys(table).forEach(tense => {
     verb_types.forEach(type => {
       var person = type.split(" ")[0]
