@@ -3,6 +3,7 @@ import {generate_question} from '../../lib/generate_question'
 import { useState } from 'react';
 import Link from "next/link";
 import { useForm } from "react-hook-form";
+import Router from "next/router";
 
 export default function Question( {question_lists, quiz_id, answer_type, question_type} ) {
   const [end_quiz, setShowMe] = useState(false);
@@ -24,11 +25,21 @@ export default function Question( {question_lists, quiz_id, answer_type, questio
     formState: { errors }
   } = useForm();
   const onSubmit = (data) => {
+    document.getElementById("guess").value = "";
     if (question_lists[count].answers.split(",").includes(data.guess.toLowerCase()) == true){
         setScore(score + 1)
     } 
     new_question()
   };
+  function handleClick(e){
+    if (question_lists[count].answers.split(",").includes(e.target.value.toLowerCase()) == true){
+      setScore(score + 1)
+    } 
+    new_question()
+  }
+  function reload(){
+    Router.reload()
+  }
   return (
     <Layout pageTitle={quiz_id} wordtype="quiz">
       <h1>{quiz_id} Quiz</h1>
@@ -41,13 +52,17 @@ export default function Question( {question_lists, quiz_id, answer_type, questio
         <p id="question">{question_lists[count].question}</p>
         {question_lists[count].choices == "input" ? (
           <form onSubmit={handleSubmit(onSubmit)}>
-            <input {...register("guess", { required: true })} placeholder="answer" type="text"/><br/>
+            <input id="guess" {...register("guess")} placeholder="answer" type="text"/><br/>
             <input type="submit" value="submit answer"/>
           </form>
         ) : (
             <>
-              <p>choices</p>
-              <button onClick={new_question}>New Question</button>
+              {question_lists[count].choices.map((choice, index) => (
+                <>
+                  <button value={choice} onClick={(e) => handleClick(e)}>{choice}</button>
+                  <br/>
+                </>
+              ))}
             </>
         )}
       </div>
@@ -55,9 +70,11 @@ export default function Question( {question_lists, quiz_id, answer_type, questio
         display: end_quiz?"block":"none"
       }}>
         <p>You finished the quiz with the score of <strong>{score}</strong> out of 10!</p>
-        <Link href={"/quiz/" + quiz_id + "?answer_type=" + answer_type + "&question_type=" + question_type}>same quiz - same question types</Link>
+        <button onClick={reload}>same quiz - same question</button>
         <br/>
-        <Link href={"/start_quiz/" + quiz_id}>same quiz - different type questions</Link>
+        <Link href={"/start_quiz/" + quiz_id}>
+          <button>same quiz - different type questions</button>
+        </Link>
       </div>
     </Layout>
   );
@@ -80,7 +97,6 @@ export async function getServerSideProps(context) {
         let question_dict = await generate_question(quiz_id, answer_type, question_type)
         question_lists.push(question_dict)
     }
-    // let question_dict = await generate_question(quiz_id, answer_type, question_type)
     if (question_lists[0].question == false){
         return {
             redirect: {
