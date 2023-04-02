@@ -1,5 +1,6 @@
 import Layout from "../../components/layout";
 import {generate_question} from '../../lib/generate_question'
+import {add_view} from '../../lib/database'
 import { useState } from 'react';
 import Link from "next/link";
 import { useForm } from "react-hook-form";
@@ -92,6 +93,7 @@ export async function getServerSideProps(context) {
             },
         }
     }
+    await add_view(quiz_id)
     var question_lists = []
     for (let i=0;i<10;i++){
         let question_dict = await generate_question(quiz_id, answer_type, question_type)

@@ -97,7 +97,7 @@ export default function Layout({ pageTitle, wordtype, children }) {
         <Link href="/all_nouns">Nouns</Link>
         <Link href="/all_verbs">Verbs</Link>
         <Link href="/convert_noun">Convert Noun</Link>
-        <Link href="convert_verb">Convert Verb</Link>
+        <Link href="/convert_verb">Convert Verb</Link>
         <Link href="/browse_sets">Browse Sets</Link>
       </nav>
       <div className={styles.content}>

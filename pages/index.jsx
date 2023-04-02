@@ -15,8 +15,6 @@ export default function HomePage() {
         <li>Has converters to convert English nouns and verbs to Latin</li>
         <li>Easily quiz yourself on vocab with the different sets</li>
       </ul>
-      <a href="https://discipulis.hashnode.dev/newsletter">Subscribe to Discipulis' newsletter</a><br/>
-      <a href="https://discipulis.hashnode.dev">View Discipulis' blog</a><br/>
       <Link href="/changelog">View the full changelog</Link><br/>
     </Layout>
   );
