@@ -3,7 +3,7 @@ import Layout from '../components/layout'
 import styles from '../styles/browse_sets.module.css';
 import Link from 'next/link';
 
-export async function getStaticProps() {
+export async function getServerSideProps(context) {
   const posts = await all_sets()
   return {
     props: {posts},
