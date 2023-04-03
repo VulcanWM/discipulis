@@ -18,11 +18,23 @@
 
 .caption {
   margin: 4px;
+  text-decoration: none;
 }
 
-/* .caption:hover {
+.caption:hover {
   text-decoration: line-through;
-} */
+}
+
+.hidecaption {
+  margin: 4px;
+  text-decoration: line-through;
+  padding-left: 6px;
+  padding-right: 6px;
+}
+
+.hidecaption:hover {
+  text-decoration: none;
+}
 
 .upper {
   text-transform: uppercase;
@@ -37,4 +49,21 @@
   font-weight: bold;
   color: var(--red);
   border-color: var(--font-color);
+}
+
+.hiddentablesbox {
+  text-align: center;
+  border: 2px solid var(--light-background);
+  color: var(--light-font);
+  border-radius: 10px;
+  padding: 4px;
+  margin: 8px;
+  width: 100%;
+}
+
+.hiddenboxitems {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
 }

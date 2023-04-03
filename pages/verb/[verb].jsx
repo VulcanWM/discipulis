@@ -7,11 +7,17 @@ import Test from "../../components/test";
 import Hide from "../../components/hide";
 
 export default function VerbPage({ verb }) {
+  const output = get_verb_table(verb);
+  const table = output.table;
+  var number_dict = {}
+  {Object.keys(table).map((number, i) => (
+    number_dict[number] = true
+  ))}
+  const [visibleTables, setVisibleTables] = useState(number_dict)
   const [visibleTableEntries, setVisibleTableEntries] = useState({});
   const [testResultEntries, setTestResultEntries] = useState({});
   const [isTestMode, setIsTestMode] = useState(false);
-  const output = get_verb_table(verb);
-  const table = output.table;
+  const [hiddenTables, setHiddenTables] = useState([])
 
   if (output.word.includes("-")) {
     var clean_word = output.word.split("-")[0];
@@ -113,7 +119,6 @@ export default function VerbPage({ verb }) {
     newVisibleTableEntries[sector][index] = true;
     setVisibleTableEntries(newVisibleTableEntries);
   };
-
   return (
     <Layout pageTitle={verb} wordtype="verb">
       <h2>
@@ -124,10 +129,38 @@ export default function VerbPage({ verb }) {
       <button onClick={show_all_cells}>Show all cells</button>
       <button onClick={test_mode_on_func}>Test Mode On</button>
       <button onClick={clear_highlight}>Clear Highlight</button>
+      <div class={styles.hiddentablesbox} style={{
+            display: hiddenTables.length>0?"block":"none"
+          }}>
+        <h3>Hidden Tables</h3>
+        <div class={styles.hiddenboxitems}>
+          {hiddenTables.map((number, i) => (
+            <span className={styles.hidecaption + " " + styles.upper} onClick={function showtable() {
+              setVisibleTables(existingValues => ({
+                ...existingValues,
+                [number]: true,
+              }))
+              setHiddenTables((current) =>
+                current.filter((n) => n !== number)
+              );
+            }}>
+              {number}
+            </span>
+          ))}
+        </div>
+      </div>
       <div className={styles.tables}>
         {Object.keys(table).map((number, i) => (
-          <table id={number} className={styles.table} key={i}>
-            <caption className={styles.caption + " " + styles.upper}>
+          <table className={styles.table} key={i} style={{
+            display: visibleTables[number]==true?"block":"none"
+          }}>
+            <caption id={number} className={styles.caption + " " + styles.upper} onClick={function showhidetable() {
+              setVisibleTables(existingValues => ({
+                ...existingValues,
+                [number]: false,
+              }))
+              setHiddenTables(oldArray => [...oldArray, number]);
+            }}>
               {number}
             </caption>
             <tbody>
