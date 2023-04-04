@@ -6,7 +6,7 @@ import Link from "next/link";
 import { useForm } from "react-hook-form";
 import Router from "next/router";
 
-export default function Question( {question_lists, quiz_id, answer_type, question_type} ) {
+export default function Question( {question_lists, quiz_id} ) {
   const [end_quiz, setShowMe] = useState(false);
   const [count, setCount] = useState(0);
   const [score, setScore] = useState(0);
@@ -108,6 +108,6 @@ export async function getServerSideProps(context) {
         }
     }
     return {
-        props: { question_lists, quiz_id, answer_type, question_type },
+        props: { question_lists, quiz_id },
     };
 }

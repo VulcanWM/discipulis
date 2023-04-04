@@ -15,7 +15,6 @@ export default function StartQuizPage( {quiz_set}) {
   const onSubmit = (data) => {
     const answer_type = data.answer_type
     var question_types = []
-    console.log(answer_type)
     for (const [key, value] of Object.entries(data)) {
       if (key.includes("question")){
         if (value != false){
@@ -23,7 +22,6 @@ export default function StartQuizPage( {quiz_set}) {
         }
       }
     }
-    console.log(question_types)
     const question_types_str = question_types.join("")
     if (question_types_str == ""){
       document.getElementById("error_msg").innerHTML = "You have to check at least one question type"
