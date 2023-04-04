@@ -1,4 +1,4 @@
-import {verbs, numbers, persons, tenses, perfect_stems, verb_types} from '../grammar/vocab'
+import {verbs, numbers, persons, tenses, perfect_stems, verb_types, supine_tenses} from '../grammar/vocab'
 
 const first_conjugation = {
     'present': ['o', 'as', 'at', 'amus', 'atis', 'ant'],
@@ -40,6 +40,13 @@ const fourth_conjugation = {
     'present passive': ['or', 'ris', 'tur', 'mur', 'mini', 'untur']
 }
 
+const to_be = {
+  'perfect passive': ['sum', 'es', 'est', 'sumus', 'estis', 'sunt'],
+  'pluperfect passive': ['eram', 'eras', 'erat', 'eramus', 'eratis', 'erant'],
+  'future perfect passive': ['ero', 'eris', 'erit', 'erimus', 'eritis', 'erunt']
+}
+
+const sing_plur_ending = ['us/a/um', 'us/a/um', 'us/a/um', 'i/ae/a', 'i/ae/a', 'i/ae/a']
 
 export function verb_english_to_latin(word, person, number, tense){
   if (tenses.includes(tense) == false){
@@ -58,6 +65,7 @@ export function verb_english_to_latin(word, person, number, tense){
   let nominative = latin_form.split(", ")[0]
   let infinitive = latin_form.split(", ")[1]
   let perfect = latin_form.split(", ")[2]
+  let supine = latin_form.split(", ")[3]
   let conjugation = latin_form.split(", ").slice(-1)[0]
   var index = persons.indexOf(person)
   var latin_word
@@ -69,27 +77,44 @@ export function verb_english_to_latin(word, person, number, tense){
   }
   if (conjugation == "1st"){
     // 1st conjugation
-    if (perfect_stems.includes(tense) == false){
-      latin_word = infinitive.slice(0,-3) + first_conjugation[tense][index]
-    } else {
+    if (perfect_stems.includes(tense)){
       latin_word = perfect.slice(0,-1) + first_conjugation[tense][index]
-    
+    } else if (supine_tenses.includes(tense)) {
+      if (supine == ""){
+        return {latin_word: "DOESN'T EXIST", nominative: nominative}
+      } else {
+        latin_word = supine.slice(0, -2) + sing_plur_ending[index] + " " + to_be[tense][index]
+      }
+    } else {
+      latin_word = infinitive.slice(0,-3) + first_conjugation[tense][index]
     }
   }
   if (conjugation == "2nd"){
     // 2nd conjugation
-    if (perfect_stems.includes(tense) == false){
-      latin_word = infinitive.slice(0,-3) + second_conjugation[tense][index]
-    } else {
+    if (perfect_stems.includes(tense)){
       latin_word = perfect.slice(0,-1) + second_conjugation[tense][index]
+    } else if (supine_tenses.includes(tense)) {
+      if (supine == ""){
+        return {latin_word: "DOESN'T EXIST", nominative: nominative}
+      } else {
+        latin_word = supine.slice(0, -2) + sing_plur_ending[index] + " " + to_be[tense][index]
+      }
+    } else {
+      latin_word = infinitive.slice(0,-3) + second_conjugation[tense][index]
     }
   }
   if (conjugation == "3rd"){
     // 3rd conjugation
-    if (perfect_stems.includes(tense) == false){
-      latin_word = infinitive.slice(0,-3) + third_conjugation[tense][index]
-    } else {
+    if (perfect_stems.includes(tense)){
       latin_word = perfect.slice(0,-1) + third_conjugation[tense][index]
+    } else if (supine_tenses.includes(tense)) {
+      if (supine == ""){
+        return {latin_word: "DOESN'T EXIST", nominative: nominative}
+      } else {
+        latin_word = supine.slice(0, -2) + sing_plur_ending[index] + " " + to_be[tense][index]
+      }
+    } else {
+      latin_word = infinitive.slice(0,-3) + third_conjugation[tense][index]
     }
   }
   if (conjugation == "4th"){
@@ -100,6 +125,12 @@ export function verb_english_to_latin(word, person, number, tense){
       latin_word = infinitive.slice(0,-3) + third_conjugation[tense][index]
     } else if (tense == "present passive"){
       latin_word = infinitive.slice(0,-2) + fourth_conjugation[tense][index]
+    } else if (supine_tenses.includes(tense)) {
+      if (supine == ""){
+        return {latin_word: "DOESN'T EXIST", nominative: nominative}
+      } else {
+        latin_word = supine.slice(0, -2) + sing_plur_ending[index] + " " + to_be[tense][index]
+      }
     } else {
       latin_word = infinitive.slice(0,-2) + third_conjugation[tense][index]
     }
@@ -116,6 +147,12 @@ export function verb_english_to_latin(word, person, number, tense){
         } else {
           latin_word = nominative.slice(0,-1) + third_conjugation[tense][index]
         }
+    } else if (supine_tenses.includes(tense)) {
+      if (supine == ""){
+        return {latin_word: "DOESN'T EXIST", nominative: nominative}
+      } else {
+        latin_word = supine.slice(0, -2) + sing_plur_ending[index] + " " + to_be[tense][index]
+      }
     } else {
       latin_word = nominative.slice(0,-1) + third_conjugation[tense][index]
     }
@@ -146,7 +183,10 @@ export function get_verb_table(first_sing){
            "future perfect": {},
            'present passive': {},
            'future passive': {},
-           'imperfect passive': {}}
+           'imperfect passive': {},
+           'perfect passive': {},
+           'future perfect passive': {},
+           'pluperfect passive': {}}
   Object.keys(table).forEach(tense => {
     verb_types.forEach(type => {
       var person = type.split(" ")[0]
