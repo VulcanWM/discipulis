@@ -79,7 +79,7 @@ export function noun_english_to_latin(word, the_case, number){
     // 3rd declension noun
     if (non_increasing_third_declension.includes(nominative)){
       // Non-increasing 3rd declension
-      if (gender == "n."){
+      if (gender == "n"){
         // Neuter non-increasing 3rd declension
         if ([0, 1, 2].includes(index)){
           latin_word = nominative
@@ -96,7 +96,7 @@ export function noun_english_to_latin(word, the_case, number){
       } 
     } else {
       // Increasing 3rd declension
-      if (gender == "n."){
+      if (gender == "n"){
         // Neuter increasing 3rd declension
         if ([0, 1, 2].includes(index)){
           latin_word = nominative
