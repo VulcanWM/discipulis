@@ -2,7 +2,9 @@ import Layout from '../components/layout'
 import styles from '../styles/changelog.module.css';
 
 const changelog_dict = {
-  "2023-03-29": "- Created the generate question function",
+  "2023-04-04": "- The passive voice has been added",
+  "2023-04-03": "- Added ability to show and hide tables",
+  "2023-04-01": "- Added quiz pages for sets",
   "2023-03-26": "- Added a flipper to the table cells",
   "2023-03-14": "- Added a show and hide all cells button for tables\n- Added a test mode feature for tables\n- Added a clear highlight button",
   "2023-03-12": "- Added a light and dark theme\n",
