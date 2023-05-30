@@ -79,7 +79,6 @@ export default function Layout({ pageTitle, wordtype, children }) {
           sizes="180x180"
           href="/apple-touch-icon.png"
         />
-        <meta name="description" content="Discipulis" />
         <meta property="og:image" content="/logo.png" />
         <meta name="og:title" content={siteTitle} />
         <meta name="twitter:card" content="summary_large_image" />
