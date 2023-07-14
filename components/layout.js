@@ -89,6 +89,7 @@ export default function Layout({ pageTitle, wordtype, children }) {
         <meta name="description" content={description} />
         <meta name="keywords" content={keywords} />
         <meta property="og:description" content={description} />
+        <meta name="google-site-verification" content="d3cd3FIDhsMDI3e_zwDnkg4GLGdu-cJu23VVpa-eC6o" />
         <title>{title}</title>
       </Head>
       <nav className={styles.mobilenav} id="navbar">
